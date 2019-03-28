@@ -13,6 +13,31 @@ public void Mirror(TreeNode root) {
         Mirror(root.right);
     }
     
+     //非递归二叉树的的镜像
+    //递归获得二叉树的镜像
+    public void verseTree(TreeNode root){
+        //声明一个链表存储二叉树节点
+        LinkedList<TreeNode> treeNodes = new LinkedList<TreeNode>();
+        TreeNode temp = null;
+        if (root ==null){
+            return;
+        }
+        treeNodes.add(root);
+        while (treeNodes.size()!=0){
+            TreeNode node = treeNodes.removeFirst();
+            temp = node.left;
+            node.left = node.right;
+            node.right = temp;
+            if (node.right!=null){
+                treeNodes.add(node.right);//入队为原来的左孩子
+            }
+
+            if (node.left!=null){
+                treeNodes.add(node.left);//入队为原来的左孩子
+            }
+        }
+       
+    }
     
    //创建一个二叉树，通过输入节点进行创建
     Scanner scanner = new Scanner(System.in);
@@ -24,7 +49,7 @@ public void Mirror(TreeNode root) {
         System.out.println("请输入节点");
         val = scanner.next(); //输入一个字符串，以空格隔开
         //每次
-        if(val.equals("#")) {
+        if(val.equals("#")) { //输入#表示该节点为空
             return null;
         }
         root = new TreeNode(Integer.parseInt(val));
@@ -33,3 +58,25 @@ public void Mirror(TreeNode root) {
         return root;
         //声明一棵树的对象root
     }
+
+
+//二叉树的层次遍历
+ public void levelTraverse( TreeNode root){
+        if (root ==null){
+            return;
+        }
+        LinkedList<TreeNode> list = new LinkedList<TreeNode>(); //声明链表
+        list.add(root);
+        while (list.size()!=0){
+            TreeNode node = list.removeFirst();//去掉根节点
+            System.out.println("树的节点"+node.val+" ");
+            if(node.left != null) {
+                list.add(node.left);  // list.add()添加单个元素，如果不指定索引的话，元素将被添加到链表的最后
+            }
+            if(node.right != null) {
+                list.add(node.right);//调式一波才知道
+            }
+        }
+    }
+    
+   
