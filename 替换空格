@@ -1,0 +1,35 @@
+ 
+ 请实现一个函数，将一个字符串中的每个空格替换成“%20”。例如，当字符串为We Are Happy.则经过替换之后的字符串为We%20Are%20Happy。
+ 1.利用java的自带函数
+ public String replaceSpace(StringBuffer str) {
+    	if(str ==null){
+            return null;
+        }
+        String s = new String(str);
+	    String ss = s.replace( " " , "%20" );
+	    return ss;
+    }
+    
+    
+    2.  23ms
+   public String replaceSpace(StringBuffer str) {
+    	if(str ==null){
+            return null;
+        }
+        //String s = str.toString();
+	   //由后面替换到前面,获得空格的位置，进行替换
+        int len = str.length();
+        int space_index = str.indexOf(" ");//获取空格的下标
+        while(space_index !=-1){
+            //进行替换
+            str.replace(space_index,space_index+1,"%20");
+            space_index = str.indexOf(" ",space_index);
+        }
+        String result = str.toString();
+        return result;
+    } 
+  
+  
+  
+  
+    
