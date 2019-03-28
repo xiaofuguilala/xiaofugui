@@ -1,3 +1,4 @@
+//二叉树反转
 public void Mirror(TreeNode root) {
          if(root == null) {
             return;
@@ -10,4 +11,25 @@ public void Mirror(TreeNode root) {
         root.right = temp;
         Mirror(root.left);
         Mirror(root.right);
+    }
+    
+    
+   //创建一个二叉树，通过输入节点进行创建
+    Scanner scanner = new Scanner(System.in);
+    //1.首先 建立二叉树-输入节点
+    public TreeNode CreateTree(TreeNode root){
+
+        //输入值
+        String val;
+        System.out.println("请输入节点");
+        val = scanner.next(); //输入一个字符串，以空格隔开
+        //每次
+        if(val.equals("#")) {
+            return null;
+        }
+        root = new TreeNode(Integer.parseInt(val));
+        root.left = CreateTree(root.left);
+        root.right = CreateTree(root.right);
+        return root;
+        //声明一棵树的对象root
     }
