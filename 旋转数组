@@ -1,0 +1,65 @@
+
+
+279ms
+ //旋转数组 找出最小的值
+    public int minNumberInRotateArray(int [] array) {
+
+        int len = array.length;
+        if(len ==0){
+            return 0;
+        }
+
+        int [] bArray = new int[len];
+        int i;
+        for( i=0;i<array.length;i++){
+            if(array[i]>array[i+1]){ //i+1为最小的数字。i为最大的数字
+                break;
+            }
+        }
+        int j=0;
+        while(i+1<len && j<len){
+            bArray[j++] = array[++i];
+
+        }
+        int k=0;
+        int m = len-j;
+        while (j<len && k<m){
+            bArray[j] = array[k];
+            j++;
+            k++;
+        }
+      return bArray[0];
+    }
+    
+    
+    
+    325ms -二分查找
+    public int minNumberInRotateArray(int [] array) {
+
+        int len = array.length;
+        if(len ==0){
+            return 0;
+        }
+        //二分查找法
+        int index1=0;
+        int index2 = len-1;
+        int indexmid = index1;
+
+        while (array[index1] >= array[index2]){
+
+            if(index2 - index1==1){
+                indexmid = index2;
+                break;
+            }else {
+                //不止一个
+                indexmid = (index1 + index2) /2;
+                if(array[indexmid] >=array[index1]){
+                    index1 = indexmid;
+                }else if(array[indexmid] <=array[index2]){
+                    index2 = indexmid;
+                }
+            }
+        }
+        return array[indexmid];
+
+    }
