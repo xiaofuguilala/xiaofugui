@@ -1,0 +1,27 @@
+
+输入一个链表，输出该链表中倒数第k个结点。
+
+public ListNode FindKthToTail(ListNode head,int k) {
+         ListNode pBehind = head;
+        ListNode pAhead = head;
+        if(head == null || k<=0){
+            return null;
+        }
+        //首节点已经赋值了，所以从1开始，i为节点数目，而不是下标
+        int i=1;
+        while(pAhead.next !=null){
+            pAhead = pAhead.next;
+            i++;
+        }
+         if(k>i){
+            return null;
+        }
+        int num=0;
+        //从头节点开始遍历，假如6个节点，倒数第三个，也就是正数第三个num<3,从0开始，也就是第三个
+        while(num <(i-k)){
+            pBehind = pBehind.next;
+            num++;
+        }
+        return pBehind;
+        
+    }
