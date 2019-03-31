@@ -1,0 +1,32 @@
+//链表的创建
+public class ListNode {
+    int val;
+    ListNode next = null;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+}
+
+//输入一个链表，反转链表后，输出新链表的表头。
+public ListNode ReverseList(ListNode head) {
+        ListNode preNode = null;
+        ListNode dropNode = null;
+        ListNode node = head;
+        
+        while(node !=null){
+            ListNode pNext = node.next;
+            if(pNext==null){
+                dropNode = node;//只有一个节点的情况下，头节点输出
+            }
+            //多个节点
+            //指向前一个节点preNode
+            node.next = preNode;
+            //node成为前一个节点
+            preNode = node;
+            //下一个节点成为当前节点
+            node = pNext;
+        }
+        
+        return dropNode;
+    }
