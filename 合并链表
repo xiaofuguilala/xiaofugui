@@ -1,0 +1,25 @@
+
+
+//输入两个单调递增的链表，输出两个链表合成后的链表，当然我们需要合成后的链表满足单调不减规则。
+ public ListNode Merge(ListNode list1,ListNode list2) {
+        
+        if(list1 == null){
+            return list2;
+        }
+          if(list2 == null){
+            return list1;
+        }
+        //声明一个链表，作为合成后的链表
+        ListNode MergeList = null;
+        //如果list1的头节点小于list2的头节点，那么新链表的头节点为list1的头节点值
+        if(list1.val < list2.val){
+            MergeList = list1;
+            //新链表的下个节点的值用递归的方法，比较list1的下一个节点和list2的头节点的值
+            MergeList.next = Merge(list1.next,list2);
+        }else{
+            //否则的情况类似
+             MergeList = list2;
+            MergeList.next = Merge(list1,list2.next);
+        }
+        return MergeList;
+    }
