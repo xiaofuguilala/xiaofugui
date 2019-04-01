@@ -1,0 +1,26 @@
+
+题目描述
+请实现一个函数，用来判断一颗二叉树是不是对称的。注意，如果一个二叉树同此二叉树的镜像是同样的，定义其为对称的。
+
+boolean isSymmetrical(TreeNode pRoot)
+    {
+        
+        //判断二叉树根节点的左节点是否等于二叉树的根节点的右节点
+        if(pRoot == null){
+            return true;
+        }
+        return IsEqual(pRoot,pRoot);
+       
+    }
+    
+    boolean IsEqual(TreeNode symmeNode, TreeNode originNode){
+       
+       if(symmeNode==null && originNode==null ){
+            return true;
+       } 
+        if(symmeNode==null || originNode==null || symmeNode.val != originNode.val){
+            return false;
+        }
+        
+        return IsEqual(symmeNode.left,originNode.right)&&IsEqual(symmeNode.right,originNode.left);
+    }
