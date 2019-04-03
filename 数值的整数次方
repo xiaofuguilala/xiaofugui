@@ -1,0 +1,16 @@
+题目描述
+给定一个double类型的浮点数base和int类型的整数exponent。求base的exponent次方。
+
+
+ public double Power(double base, int exponent) {
+        double sum=1;
+        if(exponent==0)sum=1;
+        if(base==0) sum=0;
+        int i=0;
+        while(i<Math.abs(exponent)){
+            sum=sum*base;
+            i++;
+        }
+        if(exponent <0) sum = 1/sum;
+        return sum;
+  }
