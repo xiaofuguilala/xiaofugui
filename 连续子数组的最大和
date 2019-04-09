@@ -17,3 +17,20 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
         }
         return sum;
     }
+    
+    //按照改的
+      public int FindGreatestSumOfSubArray(int[] array) {
+        if(array.length <=0) return -100;
+        int sum = array[0];
+        //每加一个数记录当前值和前一个值，
+        //如果当前值小于前一个值，则目标和为前一个值
+        int current = array[0];
+        for(int i=1;i<array.length;i++){
+            //current为当前最大
+            if(array[i]>array[i]+current) current = array[i];
+            else current = array[i]+current;
+            //然后把结果与当前值比较
+            if(sum < current) sum = current;
+        }
+        return sum;
+    }
