@@ -1,0 +1,50 @@
+
+
+题目描述
+在一个排序的链表中，存在重复的结点，请删除该链表中重复的结点，重复的结点不保留，返回链表头指针。 
+例如，链表1->2->3->3->4->4->5 处理后为 1->2->5
+
+
+思路：
+建立两个节点，一个当前节点，一个增加的前节点；
+为处理头节点就重复的操作，增加一个前节点
+遍历链表：比较当前节点是否与后一个节点的值相等，如果不等，则将头节点指向下一个节点，并把当前节点也指向下一个节点；
+如果相等，则遍历链表中的节点，不相等则退出循环，并且将当前节点指向下一个节点，再将前节点指向当前节点。再循环遍历
+/*
+ public class ListNode {
+    int val;
+    ListNode next = null;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+}
+*/
+public class Solution {
+    public ListNode deleteDuplication(ListNode pHead)
+    {
+        ListNode result;
+            ListNode temp=pHead; //表示当前节点
+            ListNode newNode=new ListNode(1); //创建一个带头节点
+            newNode.next=pHead; //表示前节点
+            result=newNode; //返回的头节点
+            while(temp!=null){
+                //如果当前节点不为空且它的值与下一个节点相等
+                //再循环判断当前节点与下一个节点是否相等，如果相等，继续判断下一个节点
+                if(temp.next!=null&&temp.next.val==temp.val){
+                    while(temp.next!=null&&temp.next.val==temp.val){
+                    temp=temp.next;
+                    }
+                    //将temp指向不相等的值，然后删除相等的值
+                    temp=temp.next;
+                    newNode.next=temp;
+                }
+                else{
+                    newNode=newNode.next;//前节点指向下一个
+                    temp=temp.next;//当前节点指向下一个
+                }
+            }
+            return result.next;
+        
+    }
+}
