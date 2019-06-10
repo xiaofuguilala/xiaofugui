@@ -1,0 +1,28 @@
+
+思路：别人的代码
+利用一个队列存储二叉树的头节点。循环存储二叉树的节点。判断此时节点不为空，
+则弹出节点，判断节点的子节点是否为空，不为空加入队列，并将弹出的节点存入链表中
+这样就能存储先存入的节点，依次加入后面的节点。
+public ArrayList<Integer> PrintFromTopToBottom(TreeNode root) {
+        
+         ArrayList<Integer> result = new ArrayList<Integer>();
+        //Queue<Integer> temp = null;
+        if(root ==null){
+            return result;
+        }
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.offer(root);
+        while(!queue.isEmpty()){
+             TreeNode treeNode = queue.poll();
+       
+            if(treeNode.left !=null){
+               queue.offer(treeNode.left);
+            }
+            if(treeNode.right !=null){
+                 queue.offer(treeNode.right);
+            }
+            result.add(treeNode.val);
+        }
+        
+        return result;
+    }
