@@ -5,7 +5,10 @@
 来源：牛客网
 非递归
 
-
+//思路 利用从上到下打印二叉树改造，记录当前弹出的个数，
+//与每一层的元素个数比较，如果弹出的节点数与当前层的节点数一致，则进行深度加一
+//比如：首先根节点个数为1，为第一层，弹出根节点数为1，则进行深度加一，
+//然后为nextCount赋值为当前层的元素个数，接着再进行弹出
 public int TreeDepth(TreeNode pRoot)
     {
         if(pRoot == null){
@@ -24,8 +27,8 @@ public int TreeDepth(TreeNode pRoot)
                 queue.add(top.right);
             }
             if(count == nextCount){
-                nextCount = queue.size(); //nextCount要等于队列的长度
-                count = 0;
+                nextCount = queue.size(); //nextCount为上一层的个数
+                count = 0; //count为弹出元素的个数
                 depth++;表示当前层数遍历完成
             }
         }
