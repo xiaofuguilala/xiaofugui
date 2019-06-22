@@ -1,0 +1,50 @@
+统计一个数字在排序数组中出现的次数。
+
+思路：写两个二分查找，第一个找到k的第一次出现的位置，第二次查找到k出现的最后一次的位置。 2logn
+
+ //有序数组二分查找
+    public int GetNumberOfK(int [] array , int k) {
+       //由于数组有序，所以使用二分查找方法定位k的第一次出现位置和最后一次出现位置
+       
+        int lower = getLower(array,k);
+        int upper = getUpper(array,k);
+        
+        return upper-lower+1;
+    }
+    
+    public int getLower(int [] array , int k){
+        
+        int start = 0;
+        int end = array.length-1;
+        
+        int mid = (start+end)>>1;
+        
+        while(start<= end){
+            if(array[mid] < k){
+                start = mid+1;
+            }else{
+                end = mid-1;
+            }
+            mid = (start+end)>>1;
+        }
+        return start;
+    }
+    
+     public int getUpper(int [] array , int k){
+        
+        int start = 0;
+        int end = array.length-1;
+        
+        int mid = (start+end)>>1;
+        
+        while(start<= end){
+        //<=是为了继续查找，直到最后一个k出现。
+            if(array[mid] <= k){
+                start = mid+1;
+            }else{
+                end = mid-1;
+            }
+            mid = (start+end)>>1;
+        }
+        return end;
+    }
