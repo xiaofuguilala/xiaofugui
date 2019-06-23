@@ -1,0 +1,55 @@
+
+思路：构建数组，判断B[0]=A[1]A[2]A[3];所以一个循环遍历数组A，第二个数组判断，如果相等就不执行乘积操作。
+
+给定一个数组A[0,1,...,n-1],请构建一个数组B[0,1,...,n-1],其中B中的元素B[i]=A[0]*A[1]*...*A[i-1]*A[i+1]*...*A[n-1]。不能使用除法。
+
+大佬思路： 下三角的乘积计算后，再接着计算上三角
+ public int[] multiply(int[] A) {
+         int length = A.length;
+        int[] B = new int[length];
+        if(length != 0 ){
+            B[0] = 1;
+            //计算下三角连乘
+            for(int i = 1; i < length; i++){
+                B[i] = B[i-1] * A[i-1];
+            }
+             int temp = 1;
+            //计算上三角
+            
+            for(int j = length-2; j >= 0; j--){
+                temp *= A[j+1];
+                B[j] *= temp;
+            }
+        }
+        return B;
+    }
+
+
+
+ public int[] multiply(int[] A) {
+
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        int[] B = new int[A.length];
+        for(int i=0;i<A.length;i++){
+
+            int temp = 1;
+            for(int j=0;j<A.length;j++){
+                if(i==j){
+                    continue;
+                }else {
+                    temp*=A[j];
+                }
+
+            }
+
+            result.add(temp);
+        }
+
+
+        for(int i=0;i<result.size();i++){
+
+           B[i] = result.get(i);
+        }
+
+        return  B;
+    }
