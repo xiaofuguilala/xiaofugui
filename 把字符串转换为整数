@@ -1,0 +1,27 @@
+题目描述
+将一个字符串转换成一个整数(实现Integer.valueOf(string)的功能，
+但是string不符合数字要求时返回0)，要求不能使用字符串转换整数的库函数。 数值为0或者字符串不是一个合法的数值则返回0。
+//符号为-时，将值*-1，如果为+时,则保持原值输出。
+转换为整数，就是遍历自负数组，总和为sum*10+chs[i]-48。
+
+ public int StrToInt(String str) {
+      
+         if (str.equals("") || str.length() == 0)
+            return 0;
+        char[] chs=str.toCharArray();
+        int len=chs.length;
+        int fuhao=0;
+        if(chs[0]=='-'){
+            fuhao=1;
+        }
+        int sum=0;
+        for(int i=fuhao;i<len;i++){
+            if(chs[i]=='+') continue;
+            if(chs[i]<'0'||chs[i]>'9'){
+                return 0;
+            }
+            sum=sum*10+chs[i]-48; //char类型的数值与整数型的值不一样 字符1表示整数49
+        }
+         
+        return fuhao==0?sum:sum*-1;
+    }
