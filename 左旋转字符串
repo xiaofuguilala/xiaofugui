@@ -1,0 +1,18 @@
+
+思路：利用取余求得从什么地方开始进行移位
+然后利用substring命令，截取开始位置到末尾位置的值。
+
+链接：https://www.nowcoder.com/questionTerminal/12d959b108cb42b1ab72cef4d36af5ec
+来源：牛客网
+
+就是用字符串模拟这个指令的运算结果。对于一个给定的字符序列S，
+请你把其循环左移K位后的序列输出。例如，字符序列S=”abcXYZdef”,要求输出循环左移3位后的结果，即“XYZdefabc”。是不是很简单？OK，搞定它！
+
+ public String LeftRotateString(String str,int n) {
+
+        int len = str.length();
+        if(len == 0) return "";
+        n = n % len;
+        str += str;//很关键
+        return str.substring(n, len+n);
+    }
