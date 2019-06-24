@@ -1,0 +1,24 @@
+
+
+例如，“student. a am I”。后来才意识到，这家伙原来把句子单词的顺序翻转了，正确的句子应该是“I am a student.”。
+思路：怎么说呢。。。别想太复杂，能不用数组遍历就不用，对于字符串的操作，可以从字符串的函数入手StringBuffer，split，toString
+
+ public String ReverseSentence(String str) {
+         if(str.trim().equals("")){
+            return str;
+        }
+        
+        //利用空格将字符串划分为多个字符串，然后按照从后向前的顺序进行重新组合，最后输出
+        String []a = str.split(" ");
+        
+        StringBuffer ab = new StringBuffer();
+        
+        for(int i=a.length;i>0;i--){
+            ab.append(a[i-1]);
+            if(i>1){
+                ab.append(" ");
+            }
+        }
+        
+        return ab.toString();
+    }
