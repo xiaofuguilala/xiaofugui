@@ -4,6 +4,17 @@
 现在,要求你使用这幅牌模拟上面的过程,然后告诉我们LL的运气如何， 如果牌能组成顺子就输出true，否则就输出false。为了方便起见,你可以认为大小王是0。
 
 
+思路：
+链接：https://www.nowcoder.com/questionTerminal/762836f4d43d43ca9deb273b3de8e1f4
+来源：牛客网
+
+max 记录 最大值
+min 记录  最小值
+min ,max 都不记0
+满足条件 1 max - min <5
+               2 除0外没有重复的数字(牌)
+               3 数组长度 为5
+
  public boolean isContinuous(int [] numbers) {
         
         
