@@ -78,5 +78,54 @@ test
         }
     }
     
-    
+  上述垃圾创建代码：
+  
+  
+   static ListNode head=null;
+    static ListNode tem = null;
+    public ListNode addNode(int d){
+        ListNode N = new ListNode(d);
+        if(head==null){
+            head = N;
+            return head;  /*由于每次是增加一个节点，所以对头结点进行初始化之后就要退出函数*/
+        }
+        tem = head;  /*一般一个链表的头结点是不能动的，因此需要把头结点赋值给一个临时变量
+		这样在对链表进行访问的时候，就可以用这个临时变量进行逐个的访问，不对头结点产生影响*/
+        while(tem.next!=null){
+            tem = tem.next;
+        }
+        tem.next = N;
+
+        return head;
+    }
+
+主程序调用：
+ Scanner sc = new Scanner(System.in);
+       //输入链表的长度
+        exre1 ex = new exre1();
+        System.out.print("请输入链表的长度");
+        int num = sc.nextInt();
+        //输入链表的内容
+        //ListNode first = new ListNode(0);
+        System.out.print("请创建链表");
+
+        int temp=0;
+        ListNode result = null;
+        for(int i=0;i<3;i++){
+            System.out.print("请输入节点的值");
+            Scanner input = new Scanner(System.in);
+            temp = input.nextInt();
+            result = ex.addNode(temp);
+        }
+
+        tem = head;
+        for (int j=0;j<3;j++){
+            System.out.print(tem.val+"  ");
+            tem = tem.next;
+        }
+        System.out.print("请输入倒数链表的个数");
+
+        int k = sc.nextInt();
+
+        System.out.print(FindKthToTail(result,k).val);
     
