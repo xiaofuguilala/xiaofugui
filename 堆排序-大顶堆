@@ -1,0 +1,70 @@
+
+
+
+
+
+
+import java.util.Arrays;
+
+/**
+ * Created by 96599 on 2019/8/20.
+ */
+public class HeapSortCl {
+
+    public static void main(String[] args) {
+        int arr[] = {4,6,8,5,9};
+
+        heapSort(arr);
+    }
+
+    //编写一个堆排序的方法
+    public static void heapSort(int arr[]){
+
+        int temp = 0;
+        //先将无序数组构造成为一个大顶堆堆，
+        for(int i = arr.length/2-1;i>=0;i--){
+            adjustHeap(arr,i,arr.length);
+        }
+
+        //进行排序
+        for(int j=arr.length-1;j>=0;j--){ //每次第一个数与最后一个数交换,每次都要少一个数建立大顶堆
+            temp = arr[j];
+            arr[j] = arr[0];
+            arr[0] = temp;
+            adjustHeap(arr,0,j);
+        }
+        System.out.print(Arrays.toString(arr));
+    }
+
+    //将一个数组，调整成一个大顶堆
+
+    /**
+     *功能：完成将i对应的非叶子节点的树调整为大顶堆
+     * 举例：int arr[]={4,6,8,5,9};=>i=1[(n/2-1)] =>adjustHeap=>得到{4，9，8，5，6}
+     * 再次调用adjustHeap 传入i=0 =>得到{4，9，8，5，6} =>{9,6,8,5,4}
+     * @param arr 待调整的数组
+     * @param i 非叶子节点在数组中的下标
+     * @param length 表示对多少个元素进行调整，length逐渐减少
+     */
+    public static void adjustHeap( int []arr,int i,int length){
+
+        int temp = arr[i];//表示当前的需要调整的父节点
+        //开始调整
+        //k=i*2+1 k是i节点的子节点 左子节点为i*2+1；
+        for(int k = i*2+1;k<length;k=2*k+1){
+
+            //左子节点的值小于右子节点
+            if(arr[k]<arr[k+1] && k+1<length){ //说明左子节点的值小于右子节点
+                k++;//指向右节点
+            }
+            if(arr[k] > temp){//左节点大于叶子节点
+                arr[i] = arr[k];
+                i=k;//i指向k,继续循环比较
+            }else {
+                break;
+            }
+        }
+        //当for循环结束后，就将以i为父节点的  的树的最大值放在了最顶（局部）
+        arr[i] = temp; //将temp值放在调整后的位置
+    }
+}
