@@ -1,0 +1,75 @@
+
+
+
+package kkmp;
+
+import java.util.Arrays;
+
+public class Kmp {
+
+    public static void main(String[] args) {
+        String str1 = "BBC ABCDAB ABCDABCDABDE";
+        String str2 = "ABCDABD";
+
+        int[] nexts = kmpNext(str2); //a aa aaa aab ab b 不是0吗？ 前面aa a,a=1 aaa a,aa aa,a =2
+        int index = kmpSearch(str1,str2,nexts);
+        System.out.println("next="+index);
+    }
+
+
+    //kmp搜索sauna发
+
+    /**
+     *
+     * @param str1 源字符串
+     * @param str2 子字符串
+     * @param next 子串的部分匹配表
+     * @return return -1 返回第一个匹配的小标
+     */
+    public static int kmpSearch(String str1,String str2,int []next){
+
+        for(int i=0,j=0;i<str1.length();i++){
+
+            //需要考虑当str1.charAt(i) != str2.charAt(j)时候的情况
+            while (j>0 && str1.charAt(i)!=str2.charAt(j)){
+
+                j= next[j-1];
+            }
+
+            if(str1.charAt(i) == str2.charAt(j)){
+                j++;
+            }
+
+            if(j==str2.length())
+                return i-j+1;
+
+        }
+
+        return -1;
+    }
+
+    //获取一个字符串的部分匹配
+    public static int[] kmpNext(String dest){
+
+        //创建一个next数组保存部分匹配
+        int next[] = new int[dest.length()];
+
+        next[0] =0; //如果字符串的长度为1，则部分匹配值就为0
+        for(int i=1,j=0;i<dest.length();i++){
+            //当dest.charAt(i) ！= dest.charAt(j)满足时，需要从next[j-1]获取新的j
+            //直到发现当dest.charAt(i) == dest.charAt(j)满足时推出
+            //kmp算法的核心
+            while (dest.charAt(i) != dest.charAt(j) && j>0){
+                j= next[j-1];
+            }
+            //当dest.charAt(i) == dest.charAt(j)满足时，部分匹配值就是+1
+            if(dest.charAt(i) == dest.charAt(j)){
+                j++;
+            }
+            next[i] = j;
+        }
+
+        return next;
+
+    }
+}
