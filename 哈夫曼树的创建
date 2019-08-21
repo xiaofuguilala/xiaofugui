@@ -1,0 +1,106 @@
+
+
+
+package huffmantreee;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+public class Huffmantree {
+
+    public static void main(String[] args) {
+
+        int arr[]={13,7,8,3,29,6,1};
+        Node root = createHuffmantree(arr);
+        preHolder(root);
+    }
+
+    public static void preHolder(Node root){
+        if(root!=null){
+            root.preOrder();
+        }else {
+            System.out.println("空数");
+        }
+    }
+
+
+    //创建huffman树
+    public static Node createHuffmantree(int arr[]){
+
+        //第一步：微操作方便，1.遍历arr，2.将arr构建一个node 3.将node放入一个list中
+        List<Node> list = new ArrayList<>();
+        for(int i=0;i<arr.length;i++){
+            list.add(new Node(arr[i]));
+        }
+
+        while (list.size()>1){
+            //排序按照从小到大
+            Collections.sort(list);
+
+            System.out.println("nodes"+list);
+            //构建huffman
+
+            //取出根节点权值最小的两颗二叉树
+            //（1）取出全脂最小的二叉树结点
+            Node leftNode = list.get(0);
+
+            //(2)取出权值次小的节点
+            Node rightNode = list.get(1);
+
+            //(3)构建一颗新的二叉树
+            Node parent = new Node(leftNode.val + rightNode.val);
+            parent.left = leftNode;
+            parent.right = rightNode;
+
+            //(4)从list处理过的删除处理的节点
+            list.remove(leftNode);
+            list.remove(rightNode);
+
+            //(5)将parent放入list
+            list.add(parent);
+        }
+
+        return list.get(0);
+    }
+}
+
+class Node implements Comparable<Node>{
+    int val;
+    Node left;
+    Node right;
+
+    public Node(int val){
+        this.val = val;
+    }
+
+    public void preOrder(){
+        System.out.println(this);
+        if(this.left!=null) {
+            this.left.preOrder();
+        }
+
+        if (this.right !=null){
+            this.right.preOrder();
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Node{" +
+                "val=" + val +
+                '}';
+    }
+
+    //让node实现compareable接口
+    //<0 就是小于 =0 就是相等 》0 就是大于
+    @Override
+    public int compareTo(Node o) {
+        return this.val-o.val;
+    }
+
+
+
+
+}
