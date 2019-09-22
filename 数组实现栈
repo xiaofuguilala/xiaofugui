@@ -1,0 +1,44 @@
+package leetcode;
+
+import java.util.ArrayList;
+import java.util.EmptyStackException;
+
+public class ArrayToStack {
+
+    //存储值
+    private Object[] value;
+    //存储指针
+    private  int top = -1;
+    //存储大小
+    private int size;
+
+    public ArrayToStack(int size){
+        value = new Object[size];
+        this.size = size;
+    }
+
+    //空栈
+    public boolean empty(){
+        return top==0;
+    }
+
+    //push
+    public void push(Object val){
+        if (top==size){
+            throw new StackOverflowError();
+        }
+
+        value[++top] = val;
+    }
+
+    public Object pop(){
+        //如果没有值，跑出异常
+        if (top<0){
+            throw new EmptyStackException();
+        }
+        //弹出
+        Object val = value[top];
+        top--;
+        return val;
+    }
+}
